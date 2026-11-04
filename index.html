@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'sha256-ijJKPjDga88INU+Ry86Jn47jrKWNCbkq7+CPBWVd8yE='; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
 <title>Supprimer son compte CartaVerse</title>
 <!--
   Story 0218 — le chemin WEB de suppression de compte.
@@ -14,6 +17,13 @@
   ⚠️ Volontairement sans script, sans police distante et sans image : elle doit
   s'afficher partout, y compris depuis le formulaire de revue de Google, et elle
   ne doit contacter personne — l'application elle-même ne le fait plus (0315).
+
+  Sécurité (2026-11-04) : GitHub Pages ne permet pas d'en-têtes HTTP ; la
+  politique de contenu passe donc par la balise meta ci-dessus. Elle n'autorise
+  QUE la feuille de style de cette page, par son empreinte : modifier le style
+  sans recalculer l'empreinte (sha256 du contenu de <style>, en base64) le fait
+  ignorer par le navigateur. Contact : support@ (alias de contact@), plus
+  aucune adresse personnelle.
 -->
 <style>
   :root { color-scheme: light dark; }
@@ -37,12 +47,13 @@ passe par nous.</p>
 
 <h2>1. Depuis l'application — immédiat</h2>
 
-<p><strong>Réglages → Supprimer mon compte.</strong> L'écran demande de retaper
-votre adresse e-mail, puis supprime le compte sans délai.</p>
+<p><strong>Paramètres → Supprimer mon compte.</strong> L'écran demande de retaper
+votre adresse e-mail (et votre second facteur, s'il est activé), puis supprime
+le compte sans délai.</p>
 
 <h2>2. Par e-mail — si vous n'avez plus l'application</h2>
 
-<p>Écrivez à <a href="mailto:mihawkxace@gmail.com?subject=Suppression%20de%20mon%20compte%20CartaVerse">mihawkxace@gmail.com</a>
+<p>Écrivez à <a href="mailto:support@cartaverse.fr?subject=Suppression%20de%20mon%20compte%20CartaVerse">support@cartaverse.fr</a>
 depuis <strong>l'adresse du compte à supprimer</strong>, avec pour objet
 « Suppression de mon compte CartaVerse ».</p>
 
@@ -59,6 +70,9 @@ n'importe qui pourrait faire supprimer le compte d'un autre.</p>
   <li>les codes de secours du second facteur et le journal de leurs
       tentatives ;</li>
   <li>les scans contribués et leurs images ;</li>
+  <li>les liens de partage de votre collection, les propositions d'échange
+      envoyées et reçues, et les signalements que vous avez faits ;</li>
+  <li>vos demandes au support et leurs captures d'écran ;</li>
   <li>la collection, les decks et les préférences présents sur l'appareil.</li>
 </ul>
 
@@ -81,13 +95,14 @@ n'importe qui pourrait faire supprimer le compte d'un autre.</p>
 <h2>Supprimer ses données sans supprimer son compte</h2>
 
 <p>C'est un geste différent, et il existe aussi :
-<strong>Réglages → Supprimer mes données</strong> vide la collection de
+<strong>Paramètres → Supprimer mes données</strong> vide la collection de
 l'appareil et <strong>garde</strong> le compte.</p>
 
 <footer>
+  Mis à jour le 4 novembre 2026.<br>
   CartaVerse — application de suivi de collections de cartes à jouer.
   Contact et politique de confidentialité :
-  <a href="mailto:mihawkxace@gmail.com">mihawkxace@gmail.com</a>.
+  <a href="mailto:support@cartaverse.fr">support@cartaverse.fr</a>.
 </footer>
 
 </body>
