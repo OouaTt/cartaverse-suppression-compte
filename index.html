@@ -3,10 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'sha256-ijJKPjDga88INU+Ry86Jn47jrKWNCbkq7+CPBWVd8yE='; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'sha256-PYLJUqhBTx2IMbd+pNf4Dg7Pn1eBN9e4DZh9+9rN/lQ=' 'unsafe-hashes' 'sha256-q3nqK4VzeI/SowYCYQ/tCfo056B/JMutuSpzbJbHczk=' 'sha256-kFAIUwypIt04FgLyVU63Lcmp2AQimPh/TdYjy04Flxs='; img-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
-<title>Supprimer son compte CartaVerse</title>
+<meta name="theme-color" content="#090F1D">
+<title>Supprimer son compte CartaVerse · Delete your CartaVerse account</title>
+<link rel="icon" href="logo.png">
 <!--
   Story 0218 — le chemin WEB de suppression de compte.
 
@@ -14,73 +16,151 @@
   compte : un dans l'application, et une page web accessible SANS installer
   l'application. C'est cette page.
 
-  ⚠️ Volontairement sans script, sans police distante et sans image : elle doit
-  s'afficher partout, y compris depuis le formulaire de revue de Google, et elle
-  ne doit contacter personne — l'application elle-même ne le fait plus (0315).
+  Volontairement sans script et sans police distante : elle doit s'afficher
+  partout, y compris depuis le formulaire de revue de Google, et elle ne doit
+  contacter personne. Seule ressource : logo.png, servi par la même origine
+  (icône de l'appli, story 0521, tools/icone/generer_icone.py).
 
   Sécurité (2026-11-04) : GitHub Pages ne permet pas d'en-têtes HTTP ; la
-  politique de contenu passe donc par la balise meta ci-dessus. Elle n'autorise
-  QUE la feuille de style de cette page, par son empreinte : modifier le style
-  sans recalculer l'empreinte (sha256 du contenu de <style>, en base64) le fait
-  ignorer par le navigateur. Contact : support@ (alias de contact@), plus
-  aucune adresse personnelle.
+  politique de contenu passe donc par la balise meta. Elle n'autorise que la
+  feuille de style de cette page, par son empreinte (sha256 du contenu de la
+  balise style, en base64), les attributs style des deux paragraphes
+  (unsafe-hashes, leurs empreintes) et les images de la même origine.
+  Modifier le style sans recalculer les empreintes le fait ignorer.
 -->
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    margin: 0 auto; padding: 2rem 1.25rem; max-width: 42rem;
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  :root {
+    color-scheme: dark;
+    --fond: #090F1D; --surface: #111a2e; --surface2: #17223a;
+    --texte: #e8ecf7; --doux: #9aa6c4; --bord: #24314f;
+    --violet: #8b5cf6; --magenta: #d946ef; --cyan: #67e8f9;
   }
-  h1 { font-size: 1.6rem; line-height: 1.25; }
-  h2 { font-size: 1.1rem; margin-top: 2rem; }
-  code { padding: .1em .35em; border-radius: .25em; background: rgba(127,127,127,.18); }
-  .avertissement { border-left: 3px solid #c00; padding-left: 1rem; }
-  footer { margin-top: 3rem; font-size: .85rem; opacity: .75; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fond); color: var(--texte);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background-image: radial-gradient(60rem 30rem at 50% -10rem,
+      rgba(139, 92, 246, .28), transparent 70%);
+    background-repeat: no-repeat;
+  }
+  main { margin: 0 auto; padding: 2.5rem 1.25rem 3rem; max-width: 44rem; }
+  .entete { text-align: center; margin-bottom: 2rem; }
+  .entete img {
+    width: 96px; height: 96px; border-radius: 22px;
+    box-shadow: 0 10px 40px rgba(217, 70, 239, .35);
+  }
+  .marque {
+    margin: .9rem 0 0; font-size: .95rem; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    background: linear-gradient(90deg, var(--violet), var(--magenta));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  h1 { font-size: 1.85rem; line-height: 1.2; margin: .35rem 0 .6rem; }
+  .chapo { color: var(--doux); margin: 0 auto; max-width: 34rem; }
+  .langues { margin-top: 1.1rem; }
+  .langues a {
+    display: inline-block; margin: 0 .2rem; padding: .25rem .9rem;
+    border: 1px solid var(--bord); border-radius: 999px;
+    color: var(--texte); text-decoration: none; font-size: .85rem;
+  }
+  .langues a:hover { border-color: var(--cyan); }
+  h2 { font-size: 1.15rem; margin: 2.2rem 0 .8rem; }
+  .carte {
+    background: var(--surface); border: 1px solid var(--bord);
+    border-radius: 16px; padding: 1.1rem 1.25rem; margin: .9rem 0;
+  }
+  .carte h3 {
+    display: flex; align-items: center; gap: .7rem;
+    margin: 0 0 .5rem; font-size: 1.05rem;
+  }
+  .num {
+    flex: none; width: 2rem; height: 2rem; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 800; color: var(--fond);
+    background: linear-gradient(135deg, var(--violet), var(--magenta));
+  }
+  .badge {
+    margin-left: auto; font-size: .75rem; font-weight: 700;
+    padding: .15rem .6rem; border-radius: 999px;
+    color: var(--cyan); border: 1px solid rgba(103, 232, 249, .45);
+  }
+  .carte p { margin: .5rem 0 0; }
+  .chemin {
+    display: inline-block; padding: .15rem .55rem; border-radius: 8px;
+    background: var(--surface2); border: 1px solid var(--bord);
+    font-weight: 700;
+  }
+  a { color: var(--cyan); }
+  ul.coches { list-style: none; padding: 0; margin: 0; }
+  ul.coches li { position: relative; padding: .35rem 0 .35rem 1.9rem; }
+  ul.coches li::before {
+    content: "✓"; position: absolute; left: 0; top: .35rem;
+    width: 1.3rem; height: 1.3rem; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: .8rem; font-weight: 800; color: var(--fond);
+    background: var(--cyan);
+  }
+  .avertissement {
+    border: 1px solid rgba(217, 70, 239, .45); border-radius: 16px;
+    background: rgba(217, 70, 239, .07); padding: .4rem 1.25rem;
+  }
+  .avertissement h2 { margin-top: .9rem; color: #f0abfc; }
+  .avertissement li { margin: .45rem 0; }
+  .note { color: var(--doux); font-size: .9rem; }
+  hr { border: 0; border-top: 1px solid var(--bord); margin: 3.5rem 0 2.5rem; }
+  footer {
+    margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--bord);
+    font-size: .85rem; color: var(--doux); text-align: center;
+  }
 </style>
 </head>
 <body>
+<main>
 
-<p lang="en"><a href="#en">English version below ↓</a></p>
+<header class="entete">
+  <img src="logo.png" alt="CartaVerse" width="96" height="96">
+  <p class="marque">CartaVerse</p>
+  <h1>Supprimer son compte CartaVerse</h1>
+  <p class="chapo">Deux chemins mènent au même effacement. Le premier est immédiat, le second passe par nous.</p>
+  <nav class="langues"><a href="#fr">Français</a><a href="#en" lang="en">English</a></nav>
+</header>
 
-<h1>Supprimer son compte CartaVerse</h1>
+<section id="fr">
 
-<p>Deux chemins mènent au même effacement. Le premier est immédiat, le second
-passe par nous.</p>
+<div class="carte">
+  <h3><span class="num">1</span> Depuis l'application <span class="badge">Immédiat</span></h3>
+  <p><span class="chemin">Paramètres → Supprimer mon compte</span></p>
+  <p>L'écran demande de retaper votre adresse e-mail (et votre second facteur,
+  s'il est activé), puis supprime le compte sans délai.</p>
+</div>
 
-<h2>1. Depuis l'application — immédiat</h2>
-
-<p><strong>Paramètres → Supprimer mon compte.</strong> L'écran demande de retaper
-votre adresse e-mail (et votre second facteur, s'il est activé), puis supprime
-le compte sans délai.</p>
-
-<h2>2. Par e-mail — si vous n'avez plus l'application</h2>
-
-<p>Écrivez à <a href="mailto:support@cartaverse.fr?subject=Suppression%20de%20mon%20compte%20CartaVerse">support@cartaverse.fr</a>
-depuis <strong>l'adresse du compte à supprimer</strong>, avec pour objet
-« Suppression de mon compte CartaVerse ».</p>
-
-<p>La demande est traitée dans le délai d'un mois prévu par le RGPD
-(article 12.3), et en pratique bien plus vite. Écrire depuis l'adresse du compte
-est ce qui nous permet de vérifier que la demande vient bien de vous : sans cela,
-n'importe qui pourrait faire supprimer le compte d'un autre.</p>
+<div class="carte">
+  <h3><span class="num">2</span> Par e-mail <span class="badge">Sans l'application</span></h3>
+  <p>Écrivez à <a href="mailto:support@cartaverse.fr?subject=Suppression%20de%20mon%20compte%20CartaVerse">support@cartaverse.fr</a>
+  depuis <strong>l'adresse du compte à supprimer</strong>, avec pour objet
+  « Suppression de mon compte CartaVerse ».</p>
+  <p class="note">La demande est traitée dans le délai d'un mois prévu par le
+  RGPD (article 12.3), et en pratique bien plus vite. Écrire depuis l'adresse du
+  compte est ce qui nous permet de vérifier que la demande vient bien de vous :
+  sans cela, n'importe qui pourrait faire supprimer le compte d'un autre.</p>
+</div>
 
 <h2>Ce qui est supprimé</h2>
-
-<ul>
+<div class="carte">
+<ul class="coches">
   <li>le compte et son adresse e-mail ;</li>
   <li>l'état de l'abonnement ;</li>
-  <li>les codes de secours du second facteur et le journal de leurs
-      tentatives ;</li>
+  <li>les codes de secours du second facteur et le journal de leurs tentatives ;</li>
   <li>les scans contribués et leurs images ;</li>
   <li>les liens de partage de votre collection, les propositions d'échange
       envoyées et reçues, et les signalements que vous avez faits ;</li>
   <li>vos demandes au support et leurs captures d'écran ;</li>
   <li>la collection, les decks et les préférences présents sur l'appareil.</li>
 </ul>
-
-<h2 class="avertissement">Ce que nous ne promettons pas</h2>
+</div>
 
 <div class="avertissement">
+<h2>Ce que nous ne promettons pas</h2>
 <ul>
   <li>Nos <strong>sauvegardes</strong> conservent les données jusqu'à
       <strong>60 jours</strong> : l'effacement y est complet au plus tard
@@ -95,43 +175,46 @@ n'importe qui pourrait faire supprimer le compte d'un autre.</p>
 </div>
 
 <h2>Supprimer ses données sans supprimer son compte</h2>
+<div class="carte">
+  <p style="margin:0">C'est un geste différent, et il existe aussi :
+  <span class="chemin">Paramètres → Supprimer mes données</span> vide la
+  collection de l'appareil et <strong>garde</strong> le compte.</p>
+</div>
 
-<p>C'est un geste différent, et il existe aussi :
-<strong>Paramètres → Supprimer mes données</strong> vide la collection de
-l'appareil et <strong>garde</strong> le compte.</p>
+</section>
 
 <hr>
 
 <section id="en" lang="en">
+<header class="entete">
+  <h1>Delete your CartaVerse account</h1>
+  <p class="chapo">Two ways lead to the same erasure. The first is immediate, the second goes through us.</p>
+</header>
 
-<h1>Delete your CartaVerse account</h1>
+<p class="note" style="text-align:center"><em>This translation is provided for
+convenience; only the French version above is legally binding.</em></p>
 
-<p><em>This translation is provided for convenience; only the French version
-above is legally binding.</em></p>
+<div class="carte">
+  <h3><span class="num">1</span> From the app <span class="badge">Immediate</span></h3>
+  <p><span class="chemin">Settings → Delete my account</span></p>
+  <p>The screen asks you to retype your email address (and your second factor,
+  if enabled), then deletes the account right away.</p>
+</div>
 
-<p>Two ways lead to the same erasure. The first is immediate, the second goes
-through us.</p>
-
-<h2>1. From the app — immediate</h2>
-
-<p><strong>Settings → Delete my account.</strong> The screen asks you to retype
-your email address (and your second factor, if enabled), then deletes the
-account right away.</p>
-
-<h2>2. By email — if you no longer have the app</h2>
-
-<p>Write to <a href="mailto:support@cartaverse.fr?subject=Delete%20my%20CartaVerse%20account">support@cartaverse.fr</a>
-from <strong>the email address of the account to delete</strong>, with the
-subject “Delete my CartaVerse account”.</p>
-
-<p>The request is handled within the one-month period set by the GDPR
-(Article 12(3)), and in practice much faster. Writing from the account's
-address is how we check that the request really comes from you: otherwise,
-anyone could have someone else's account deleted.</p>
+<div class="carte">
+  <h3><span class="num">2</span> By email <span class="badge">Without the app</span></h3>
+  <p>Write to <a href="mailto:support@cartaverse.fr?subject=Delete%20my%20CartaVerse%20account">support@cartaverse.fr</a>
+  from <strong>the email address of the account to delete</strong>, with the
+  subject “Delete my CartaVerse account”.</p>
+  <p class="note">The request is handled within the one-month period set by the
+  GDPR (Article 12(3)), and in practice much faster. Writing from the account's
+  address is how we check that the request really comes from you: otherwise,
+  anyone could have someone else's account deleted.</p>
+</div>
 
 <h2>What is deleted</h2>
-
-<ul>
+<div class="carte">
+<ul class="coches">
   <li>the account and its email address;</li>
   <li>the subscription status;</li>
   <li>the second-factor backup codes and the log of their attempts;</li>
@@ -141,10 +224,10 @@ anyone could have someone else's account deleted.</p>
   <li>your support requests and their screenshots;</li>
   <li>the collection, decks and preferences stored on the device.</li>
 </ul>
-
-<h2 class="avertissement">What we do not promise</h2>
+</div>
 
 <div class="avertissement">
+<h2>What we do not promise</h2>
 <ul>
   <li>Our <strong>backups</strong> keep data for up to <strong>60 days</strong>:
       erasure there is complete at the latest <strong>90 days</strong> after
@@ -158,19 +241,22 @@ anyone could have someone else's account deleted.</p>
 </div>
 
 <h2>Delete your data without deleting your account</h2>
-
-<p>This is a different action, and it exists too:
-<strong>Settings → Delete my data</strong> empties the collection on the device
-and <strong>keeps</strong> the account.</p>
+<div class="carte">
+  <p style="margin:0">This is a different action, and it exists too:
+  <span class="chemin">Settings → Delete my data</span> empties the collection on
+  the device and <strong>keeps</strong> the account.</p>
+</div>
 
 </section>
 
 <footer>
-  Mis à jour le 4 novembre 2026 · Updated 4 November 2026.<br>
-  CartaVerse — application de suivi de collections de cartes à jouer.
-  Contact et politique de confidentialité :
-  <a href="mailto:support@cartaverse.fr">support@cartaverse.fr</a>.
+  Mis à jour le 4 novembre 2026 · Updated 4 November 2026<br>
+  CartaVerse — application de suivi de collections de cartes à jouer ·
+  trading card collection tracker.<br>
+  Contact et politique de confidentialité · Contact and privacy:
+  <a href="mailto:support@cartaverse.fr">support@cartaverse.fr</a>
 </footer>
 
+</main>
 </body>
 </html>
