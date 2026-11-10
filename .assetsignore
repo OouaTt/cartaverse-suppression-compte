@@ -1,0 +1,6 @@
+# Story 0557 — fichiers du dépôt qui ne doivent pas être servis par
+# Cloudflare (Worker à fichiers statiques, dossier racine).
+wrangler.jsonc
+wrangler.json
+wrangler.toml
+.assetsignore
